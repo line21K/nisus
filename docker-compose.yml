@@ -1,0 +1,19 @@
+version:  '3.6'
+
+volumes:
+  nisus-node_modules:
+
+services:
+  frontend:
+    container_name: nisus-frontend
+    image: node:14-alpine
+    working_dir: /app
+    ports:
+      - '3000:8080'
+    volumes:
+      - ./frontend:/app
+      - nisus-node_modules:/app/node_modules
+    entrypoint:
+      - /bin/sh
+      - -c
+      - cd /app && yarn install && yarn serve
