@@ -1,0 +1,16 @@
+version:  '3.6'
+
+volumes:
+  nisus_databas_data:
+
+services:
+  database:
+    container_name: nisus-database
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: nisus
+      MONGO_INITDB_ROOT_PASSWORD: nisus
+    ports:
+      - 27017:27017
+    volumes:
+      - nisus_databas_data:/data/db
