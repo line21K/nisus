@@ -1,0 +1,15 @@
+{
+  "name": "nisus",
+  "version": "1.0.0",
+  "description": "nisus backend",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Nephyx",
+  "license": "ISC"
+}
