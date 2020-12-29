@@ -1,16 +1,24 @@
-version: "3"
+---
+#-------------------------------------------------------------------------------------------------------------
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
+#-------------------------------------------------------------------------------------------------------------
 
+version: "3"
 services:
-  app:
+  web:
+    # Uncomment the next line to use a non-root user for all processes. You can also
+    # simply use the "remoteUser" property in devcontainer.json if you just want VS Code
+    # and its sub-processes (terminals, tasks, debugging) to execute as the user. On Linux,
+    # you may need to update USER_UID and USER_GID in .devcontainer/Dockerfile to match your
+    # user if not 1000. See https://aka.ms/vscode-remote/containers/non-root for details.
+    # user: node
+
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        # [Choice] Node.js version: 14, 12, 10
-        VARIANT: 14
-        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
-        USER_UID: 1000
-        USER_GID: 1000
+        VARIANT: 12
 
     volumes:
       - ..:/workspace:cached
@@ -18,28 +26,11 @@ services:
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
 
-    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    network_mode: service:db
+    links:
+      - mongo
 
-    # Uncomment the next line to use a non-root user for all processes.
-    # user: node
-
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
-
-  db:
-    image: mongo:latest
+  mongo:
+    image: mongo
     restart: unless-stopped
     volumes:
-      - mongodb-data:/data/db
-
-    # Uncomment to change startup options
-    # environment:
-    #  MONGO_INITDB_ROOT_USERNAME: root
-    #  MONGO_INITDB_ROOT_PASSWORD: example
-    #  MONGO_INITDB_DATABASE: your-database-here
-
-    # Add "forwardPorts": ["27017"] to **devcontainer.json** to forward MongoDB locally.
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
-
-volumes: mongodb-data
+      - /data/db
