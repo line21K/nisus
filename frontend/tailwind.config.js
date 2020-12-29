@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  ** TailwindCSS Configuration File
  **
@@ -138,3 +139,16 @@ module.exports = {
   },
   plugins: []
 }
+=======
+module.exports = {
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};
+>>>>>>> nuxt-config
