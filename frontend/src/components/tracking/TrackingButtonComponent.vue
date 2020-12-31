@@ -1,19 +1,25 @@
 <template lang="">
   <div class="trackingButtonComponent">
     <h2>This is tracking button component</h2>
-    <button class="glow-on-hover" @click="wasClicked">
-      {{ counter }}
+    <button
+      class="uppercase px-8 py-2 bg-gray-300 text-gray-600 max-w-max shadow-sm hover:shadow-md glow-on-hover"
+      @click="wasClicked"
+    >
+      <TrackButtonBodyComponent :counter="counter" />
     </button>
   </div>
 </template>
 <script>
+import TrackButtonBodyComponent from "@/components/tracking/TrackingButtonBodyComponent.vue";
 export default {
+  components: { TrackButtonBodyComponent },
   data() {
     return {
       counter: 0,
       clicked: false
     };
   },
+
   methods: {
     wasClicked() {
       this.counter += 1;
@@ -27,8 +33,6 @@ export default {
   height: 50px;
   border: 20px;
   outline: none;
-  color: #b83d6e;
-  background: #33ffbd;
   cursor: pointer;
   position: relative;
   z-index: 0;
@@ -75,5 +79,8 @@ export default {
   left: 0;
   top: 0;
   border-radius: 10px;
+}
+.inline {
+  display: inline-block;
 }
 </style>
